@@ -151,6 +151,17 @@ public class MyTerminal {
 		text.putString(x, y, s);
 		y++;
 	}
+
+	/**
+	 * Obtém informações sobre o caractere em determinada posição
+	 * do terminal.
+	 * @param x coordenada X da posição
+	 * @param y coordenada Y da posição
+	 * @return o caracter, representado como String
+	 */
+	public TextCharacter getCharacterInfo(int x, int y) {
+		return screen.getFrontCharacter(x, y);
+	}
 	
 	/**
 	 * Obtém o caractere em determinada posição do terminal.
@@ -159,7 +170,7 @@ public class MyTerminal {
 	 * @return o caracter, representado como String
 	 */
 	public String getCharacter(int x, int y) {
-		TextCharacter tc = screen.getFrontCharacter(x, y);
+		TextCharacter tc = getCharacterInfo(x, y);
 		return tc == null ? "" : tc.getCharacterString();
 	}
 	/**
