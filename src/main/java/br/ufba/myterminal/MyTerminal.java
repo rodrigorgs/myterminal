@@ -3,6 +3,7 @@ package br.ufba.myterminal;
 import java.io.IOException;
 
 import com.googlecode.lanterna.TerminalPosition;
+import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
@@ -27,12 +28,10 @@ public class MyTerminal {
 	private int x = 0;
 	private int y = 0;
 	private boolean shouldCloseOnEscape = true;
-	
-	public MyTerminal() {
+
+	private void init(Terminal terminal) {
 		try {
-			DefaultTerminalFactory defaultTerminalFactory = new DefaultTerminalFactory();
-	
-			terminal = defaultTerminalFactory.createTerminal();
+			this.terminal = terminal;
 			terminal.setCursorVisible(false);
 			
 			screen = new TerminalScreen(terminal);
@@ -41,8 +40,24 @@ public class MyTerminal {
 			text = screen.newTextGraphics();
 		} catch (IOException e) {
 			System.err.println("Erro ao criar terminal.");
+			e.printStackTrace();
 			System.exit(1);
 		}
+	}
+	public MyTerminal() {
+		try {
+			DefaultTerminalFactory defaultTerminalFactory = new DefaultTerminalFactory();
+			terminal = defaultTerminalFactory.createTerminal();
+			init(terminal);
+		} catch (IOException e) {
+			System.err.println("Erro ao criar terminal.");
+			e.printStackTrace();
+			System.exit(1);
+		}
+	}
+	
+	public MyTerminal(Terminal terminal) {
+		init(terminal);
 	}
 	
 	/**
@@ -135,6 +150,17 @@ public class MyTerminal {
 		String s = "" + o;
 		text.putString(x, y, s);
 		y++;
+	}
+	
+	/**
+	 * Obtém o caractere em determinada posição do terminal.
+	 * @param x coordenada X da posição
+	 * @param y coordenada Y da posição
+	 * @return o caracter, representado como String
+	 */
+	public String getCharacter(int x, int y) {
+		TextCharacter tc = screen.getFrontCharacter(x, y);
+		return tc == null ? "" : tc.getCharacterString();
 	}
 	/**
 	 * Define cor do texto.
