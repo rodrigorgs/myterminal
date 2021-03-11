@@ -9,7 +9,7 @@ Para usar esta biblioteca em um projeto Maven, edite o arquivo `pom.xml`, adicio
 ```xml
 <project ...>
 
-  <!-- Adicione este repositório -->
+	<!-- Adicione este repositório -->
 	<repositories>
 		<repository>
 			<id>jitpack.io</id>
@@ -18,9 +18,9 @@ Para usar esta biblioteca em um projeto Maven, edite o arquivo `pom.xml`, adicio
 	</repositories>
 
 	<dependencies>
-    <!-- Aqui você pode ter várias dependências -->
+		<!-- Aqui você pode ter várias dependências -->
     
-    <!-- Adicione esta dependência -->
+		<!-- Adicione esta dependência -->
 		<dependency>
 			<groupId>com.github.rodrigorgs</groupId>
 			<artifactId>myterminal</artifactId>
